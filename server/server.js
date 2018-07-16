@@ -1,22 +1,42 @@
 const path = require('path');
-const fs 	 = require('fs');
+const fs = require('fs');
 
 let dataPath = path.join(__dirname, '../chirps.json');
 
 let chirpArr = [
-	"David - I love my HoneyB",
-	"April - David is the best husband ever",
-	"Breslynn - I am my daddy's HoneyB",
-	"Beckham - I like my mommy best",
-	"David - I love my family"
-]
+	{
+		name: 'David',
+		chirp: 'I love my HoneyB'
+	},
+	{
+		name: 'April',
+		chirp: 'David is the best husband ever'
+	},
+	{
+		name: 'Breslynn',
+		chirp: "I am my daddy's HoneyB"
+	},
+	{
+		name: 'Beckham',
+		chirp: 'I like my mommy best'
+	},
+	{
+		name: 'David',
+		chirp: 'I love my family'
+	}
+];
 
-chirpArr.forEach(obj => {
-	fs.appendFileSync(dataPath, obj + '\n');
+// chirpArr.forEach(obj => {
+// 	fs.appendFileSync(dataPath, obj + '\n');
+// });
+
+let data = JSON.stringify(chirpArr);
+
+fs.appendFileSync(dataPath, data, err => {
+	console.log(err);
 });
 
 fs.readFile(dataPath, 'utf8', (err, data) => {
 	if (err) console.log(err);
 	console.log(data);
 });
-
